@@ -9,30 +9,15 @@
   <body>
 
 
+    <button class="allTasks-btn" type="button">All Tasks</button>
 
+    <div class="all-assigner-buttons">
+      <button class="assigner-btn" data-assigner="user1" type="button">user1</button>
+      <button class="assigner-btn" data-assigner="user2" type="button">user2</button>
+      <button class="assigner-btn" data-assigner="user3" type="button">user3</button>
+      <button class="assigner-btn" data-assigner="user4" type="button">user4</button>
+    </div>
 
-    <!-- <button type="button" class="all-tasks">All Tasks</button>
-    <button type="button" class="assigner-btn" data-assigner="user1">User 1</button>
-    <button type="button" class="assigner-btn" data-assigner="user2">User 2</button>
-    <button type="button" class="assigner-btn" data-assigner="user3">User 3</button>
-    <button type="button" class="assigner-btn" data-assigner="user4">User 4</button>
-  -->
-  <!-- <div class="assigner-buttons">
-    <label for="assigner-select">Assigner:</label>
-    <select id="assigner-select">
-      <option value="all">All Assigners</option>
-      <option value="user1">User 1</option>
-      <option value="user2">User 2</option>
-      <option value="user3">User 3</option>
-      <option value="user4">User 4</option>
-    </select>
-  </div> -->
-  
-
-
-
-
-    
     <div class="row">
       <form class="form" action="">
         <div class="input-row">
@@ -41,52 +26,56 @@
         </div>
 
         <div class="input-row">
-            <label>Story Point</label>
-            <input type="number" name="story-point" />
-          </div>
+          <label>Story Point</label>
+          <input type="number" name="story-point" />
+        </div>
 
-          <div class="input-row">
-            <label>Assigner</label>
-            <select name="assigner">
-                <option value="user1">user1</option>
-                <option value="user2">user2</option>
-                <option value="user3">user3</option>
-                <option value="user4">user4</option>
-            </select>  
-          </div>
+        <div class="input-row">
+          <label>Assigner</label>
+          <select name="assigner">
+            <option data-assigner="user1" value="user1">user1</option>
+            <option data-assigner="user2" value="user2">user2</option>
+            <option data-assigner="user3" value="user3">user3</option>
+            <option data-assigner="user4" value="user4">user4</option>
+          </select>
+        </div>
 
-          
-          <div class="input-row stage-row hide">
-            <label>Stage</label>
-            <select name="stage">
-              <option value="TODO">Todo</option>
-              <option value="IN_PROGRESS">In progress</option>
-              <option value="DONE">Done</option>
-          </select> 
-          </div>
-          <div class="btns">
+        <div class="input-row stage-row hide">
+          <label>Stage</label>
+          <select name="stage">
+            <option value="TODO">Todo</option>
+            <option value="IN_PROGRESS">In progress</option>
+            <option value="DONE">Done</option>
+          </select>
+        </div>
+        <div class="btns">
           <button type="submit">Add Task</button>
           <button type="button" class="update-btn hide">Update Task</button>
-          </div>
-
+        </div>
       </form>
 
       <div class="tasks">
         <div class="task-section new-text">
           <div class="todo">
             <h2>Todo</h2>
-            <div class="todo-container element-container" data-name="TODO">             
-            </div>
+            <div
+              class="todo-container element-container"
+              data-name="TODO"
+            ></div>
           </div>
           <div class="inprogress">
             <h2>In progress</h2>
-            <div class="inprogress-container element-container" data-name="IN_PROGRESS">
-            </div>
+            <div
+              class="inprogress-container element-container"
+              data-name="IN_PROGRESS"
+            ></div>
           </div>
           <div class="done">
             <h2>Done</h2>
-            <div class="done-container element-container" data-name="DONE">
-            </div>
+            <div
+              class="done-container element-container"
+              data-name="DONE"
+            ></div>
           </div>
         </div>
       </div>

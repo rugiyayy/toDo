@@ -42,7 +42,6 @@ function AddTask(e) {
       updateBtn.classList.add("hide");
       stageRow.classList.add("hide");
 
-
       // Save added tasks to local storage + nujno ehse i v upd task toje
       localStorage.setItem("tasks", JSON.stringify(tasksAr));
     }
@@ -61,15 +60,20 @@ function ClearInputs() {
   stage.value = "";
 }
 
-function List() {
+function List(filterTask) {
   toDoContainer.innerHTML = "";
   inprogressContainer.innerHTML = "";
   doneContainer.innerHTML = "";
 
   let sortedTask = tasksAr.sort((x, y) => x.createdAt - y.createdAt);
+
+  if (filterTask) {
+    sortedTask = filterTask;
+  }
+
   //sozdaem sorted chtobi potom uje proytis po sortirovannomu array
   //..sortirovan etot array po date(: --createdAt)
-
+  
   sortedTask.forEach((task, index) => {
     let taskElement = `<div class="element" data-id="${index}"  draggable="true">${task.name}<span>${task.point}</span></div> `;
     switch (task.stage) {
@@ -121,7 +125,7 @@ function Draggable() {
               tasksAr.splice(id, 1, updatedTask);
               List();
 
-               localStorage.setItem("tasks", JSON.stringify(tasksAr));
+              localStorage.setItem("tasks", JSON.stringify(tasksAr));
             }
 
             element = null; //koqda delaesh drop vtoroy raz beretsa prejne dobavlenniy element toje--chtobi predotvratit eto
@@ -190,9 +194,8 @@ function UpdateTask() {
       updateBtn.classList.add("hide");
       stageRow.classList.add("hide");
 
- 
- localStorage.setItem("tasks", JSON.stringify(tasksAr));
- /*  yesli ya uberu eto otsuda , to vse IZMENENIYA (updatetsk) budut poterani.. pri refresh(/next page load) will be restored iz sostoyaniya  soxranennoqo v LOCALSTORAGE DO modification .
+      localStorage.setItem("tasks", JSON.stringify(tasksAr));
+      /*  yesli ya uberu eto otsuda , to vse IZMENENIYA (updatetsk) budut poterani.. pri refresh(/next page load) will be restored iz sostoyaniya  soxranennoqo v LOCALSTORAGE DO modification .
   to est izmeneniya ne soxranatsa .
  task will be обновлена в памяти (в массиве tasksAr), но не будет обновлена в хранилище localStorage*/
       updatedId = null;
@@ -203,10 +206,27 @@ function UpdateTask() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Retrieve iz lstorage 
+  // Retrieve iz lstorage
   let storedTasks = localStorage.getItem("tasks");
   if (storedTasks) {
     tasksAr = JSON.parse(storedTasks);
-    List(); // mi delaem Refresh task list 
+    List(); // mi delaem Refresh task list
   }
 });
+
+let allTasksBtn = document.querySelector(".allTasks-btn");
+let assignerButtons = document.querySelectorAll(".assigner-btn");
+
+allTasksBtn.addEventListener("click", function () {
+  List();
+});
+
+assignerButtons.forEach((button) => {
+  button.addEventListener("click", function () {
+    let assignerName = button.getAttribute("data-assigner")|| button.textContent;;
+    let filteredTasks = tasksAr.filter(task => task.assigner === assignerName);
+    List(filteredTasks);
+    console.log(filteredTasks);
+  });
+});
+
